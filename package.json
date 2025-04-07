@@ -1,5 +1,5 @@
 {
-  "name": "velocityjs",
+  "name": "@eyeseetea/velocityjs",
   "description": "Velocity Template Language(VTL) for JavaScript",
   "version": "2.0.6",
   "license": "MIT",
@@ -14,7 +14,7 @@
   "engines": {
     "node": ">=0.8.0"
   },
-  "main": "src/velocity.js",
+  "main": "out.js",
   "bin": {
     "velocity": "bin/velocity"
   },
@@ -25,6 +25,7 @@
   "devDependencies": {
     "amplify-appsync-simulator": "^2.3.5",
     "auto-changelog": "^2.3.0",
+    "esbuild": "0.25.2",
     "jison": ">=0.3",
     "mocha": "^9.1.4",
     "nyc": "^15.1.0",
@@ -32,11 +33,11 @@
   },
   "scripts": {
     "test": "mocha test --require should",
-    "prepublishOnly": "PACKAGE_VERSION=$(node -p -e \"require('./package.json').version\") npm run tag",
     "version": "npm run changelog && git add . && git commit -m 'chore: update history.md' && git push origin",
-    "tag": "if [[ $PACKAGE_VERSION != *\"beta\"* ]];then git tag v$PACKAGE_VERSION && git push --tags; fi",
     "changelog": "auto-changelog -p -u",
-    "ci": "nyc mocha --require should"
+    "ci": "nyc mocha --require should",
+    "copy-publish-files": "cp package.json dist/package.json && cp README.md dist/README.md",
+    "build": "esbuild src/velocity.js --bundle --platform=neutral --packages=external --outfile=dist/out.js && yarn copy-publish-files"
   },
   "auto-changelog": {
     "output": "History.md",
@@ -47,8 +48,5 @@
   "spm": {
     "main": "index.js",
     "buildArgs": "--skip fs,path"
-  },
-  "dependencies": {
-    "debug": "^4.3.3"
   }
 }
