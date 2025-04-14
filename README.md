@@ -150,3 +150,10 @@ Recommend an other [velocity](https://github.com/fool2fish/velocity).
 ## License
 
 (The MIT License)
+
+## ESM Build
+
+```bash
+yarn build
+# dist/out.js
+```

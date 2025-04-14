@@ -5,5 +5,4 @@ Makefile
 examples
 coverage
 build
-dist
 tests

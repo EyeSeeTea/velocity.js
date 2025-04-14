@@ -1,5 +1,3 @@
-var debug = require('debug')('velocity');
-
 module.exports = function(Velocity, utils) {
 
   'use strict';
@@ -194,7 +192,6 @@ module.exports = function(Velocity, utils) {
       });
 
       if (matched) {
-        debug('match custom method handler, uid %s', matched.uid);
         // run custom method handler, we can
         // add some native method which Java can do, for example
         // #set($foo = [1, 2]) $foo.size()
